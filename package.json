@@ -1,0 +1,16 @@
+{
+  "name": "apb-mocha-reporter",
+  "version": "1.0.5",
+  "description": "A simple dashboard to report mocha test runs.",
+  "main": "src/apbmochareporter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mocha",
+    "test",
+    "unit"
+  ],
+  "author": "Aidan Breen",
+  "license": "ISC"
+}

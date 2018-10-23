@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <meta http-equiv="refresh" content="60"/>
+    <style type="text/css">
+      body{
+        font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+      }
+      .content{
+        margin: 2em auto;
+        width: 900px;
+      }
+      .content:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      p{
+        margin: 10px 10px;
+      }
+      .block{
+        display:block;
+        box-sizing: border-box;
+        float:left;
+        margin: 0 10px;
+        padding: 2em 1em 1em 1em;
+        width: 280px;
+        background-color: #acd3fc;
+        -webkit-box-shadow: 6px 6px 0px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 6px 6px 0px 0px rgba(0,0,0,0.75);
+        box-shadow: 6px 6px 0px 0px rgba(0,0,0,0.75);
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+      .block h1{
+        color: rgba( 0, 0, 0, 0.5)
+      }
+      .block .fraction{
+        font-size: 1rem;
+      }
+      .block .percent{
+        font-size: 4rem;
+      }
+      .block span{
+        display: block;
+        clear: both;
+      }
+      .passed{
+        background-color: #acfcc9;
+      }
+      .failed{
+        background-color: #fcacac;
+      }
+    </style>
+  </head>
+  <body>
+    <script> console.log("Last refreshed: "+new Date()) </script>
+    <div class="content">
+      <p class="timestamp">Last run: {{lastrun_date}}</p>
+      <div class="block total">
+        <span class="percent">{{run_percent}}%</span>
+        <span class="fraction">{{run_numerator}} / {{run_denominator}}</span>
+        <h1>Run</h1>
+      </div>
+      <div class="block passed">
+        <span class="percent">{{pass_percent}}%</span>
+        <span class="fraction">{{pass_numerator}} / {{pass_denominator}}</span>
+        <h1>Passed</h1>
+      </div>
+      <div class="block failed">
+        <span class="percent">{{fail_percent}}%</span>
+        <span class="fraction">{{fail_numerator}} / {{fail_denominator}}</span>
+        <h1>Failed</h1>
+      </div>
+    </div>
+  </body>
+</html>
