@@ -1,6 +1,6 @@
 {
   "name": "apb-mocha-reporter",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A simple dashboard to report mocha test runs.",
   "main": "src/apbmochareporter.js",
   "scripts": {
