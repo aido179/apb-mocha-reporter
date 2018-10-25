@@ -85,8 +85,6 @@ If you want to fiddle around with the template, you will find apbmochareporter_T
 
 I didn't want to bloat the package by adding unnecessary templating dependencies, so it currently uses a potentially fragile (but lightweight!) regex based solution that replaces the strings surrounded by double curly braces (eg. ```{{string}}```).
 
-*Potential future feature: Supply your own template as a cli arg*
-
 ## Contributing
 PRs welcome.
 
