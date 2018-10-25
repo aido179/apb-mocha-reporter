@@ -8,25 +8,20 @@ function apbmochareporter(runner, options) {
   const SAVEJSON = options.reporterOptions.savejson
 
   mocha.reporters.Base.call(this, runner);
-  // Values for the billboard / dashboard
-  var passes = 0
-  var failures = 0
-  var sum = 0
-  var total = runner.total
+
+  var sum = 0 // Sum of tests as they run. This is probably unecessary but I want to output 3 boxes
   //values for the JSON output
   var json_tests = [];
   var json_pending = [];
   var json_failures = [];
   var json_passes = [];
 
-  function update(){
-    if(!SILENT){
-      process.stderr.write(`\rerr"${sum}`);
-      process.stdout.write(`\r${sum}/${total} - ${passes} passed. ${failures} failed.                       `);
-    }
-  }
+
   function write(str){
     if(!SILENT) process.stdout.write(str);
+  }
+  function update(){
+    write(`\r${runner.stats.tests}/${runner.total} - ${runner.stats.passes} passed. ${runner.stats.failures} failed.                       `);
   }
 
   write("APB Mocha Reporter\n");
@@ -35,14 +30,12 @@ function apbmochareporter(runner, options) {
   });
 
   runner.on('pass', function(test){
-    passes++;
     sum++;
     json_passes.push(test);
     update()
   });
 
   runner.on('fail', function(test, err){
-    failures++;
     sum++;
     json_failures.push(test);
     update()
@@ -53,21 +46,22 @@ function apbmochareporter(runner, options) {
   });
 
   runner.on('end', function(){
+    update()
     write('\nGenerating HTML...')
-    let pass_percent = Math.floor((passes/total)*100)
-    let fail_percent = Math.floor((failures/total)*100)
-    let run_percent = Math.floor((sum/total)*100)
+    let pass_percent = Math.floor((runner.stats.passes/runner.stats.tests)*100)
+    let fail_percent = Math.floor((runner.stats.failures/runner.stats.tests)*100)
+    let run_percent = Math.floor((runner.stats.tests/runner.total)*100)
     let htmlOutput = updateBillboard({
       "{{lastrun_date}}": new Date(),
       "{{run_percent}}": run_percent,
-      "{{run_numerator}}": sum,
-      "{{run_denominator}}": total,
+      "{{run_numerator}}": runner.stats.tests,
+      "{{run_denominator}}": runner.total,
       "{{pass_percent}}": pass_percent,
-      "{{pass_numerator}}": passes,
-      "{{pass_denominator}}": total,
+      "{{pass_numerator}}": runner.stats.passes,
+      "{{pass_denominator}}": runner.stats.tests,
       "{{fail_percent}}": fail_percent,
-      "{{fail_numerator}}": failures,
-      "{{fail_denominator}}": total
+      "{{fail_numerator}}": runner.stats.failures,
+      "{{fail_denominator}}": runner.stats.tests
     })
     write(`\rHTML output to: ${htmlOutput}`)
     if(SAVEJSON !== undefined){
@@ -92,8 +86,8 @@ function updateBillboard(replacements){
   //This is a rudimentary templating engine for the html template
   //It should work for reasonable tags provided as object keys of "replacements"
   //but bo guarantees are made!
-  content = fs.readFileSync(`${__dirname}/apbmochareporter_TEMPLATE.html`, {encoding:'utf8'})
-  let newContent = content.replace(/{{.*?}}/g, function(match){
+  template = fs.readFileSync(`${__dirname}/apbmochareporter_TEMPLATE.html`, {encoding:'utf8'})
+  let newContent = template.replace(/{{.*?}}/g, function(match){
     return replacements[match]
   })
   let output_dir = `${process.cwd()}/apb-mocha-reporter-report`
