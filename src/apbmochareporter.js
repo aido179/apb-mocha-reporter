@@ -86,7 +86,7 @@ function updateBillboard(replacements){
   //This is a rudimentary templating engine for the html template
   //It should work for reasonable tags provided as object keys of "replacements"
   //but bo guarantees are made!
-  template = fs.readFileSync(`${__dirname}/apbmochareporter_TEMPLATE.html`, {encoding:'utf8'})
+  template = fs.readFileSync(`${__dirname}/../templates/apbmochareporter_TEMPLATE.html`, {encoding:'utf8'})
   let newContent = template.replace(/{{.*?}}/g, function(match){
     return replacements[match]
   })
