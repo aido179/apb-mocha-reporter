@@ -7,6 +7,8 @@ A zero-dependency tool that displays your unit test results in a nifty HTML page
 - HTML dashboard Auto refreshes every minute
 - Output detailed test results to JSON
 
+**Note: This package requires the Node fs module. It does not work in the browser.**
+
 ![Screenshot](https://github.com/aido179/apb-mocha-reporter/blob/master/img/dash_screenshot.png)
 
 
