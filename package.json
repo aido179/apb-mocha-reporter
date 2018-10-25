@@ -9,8 +9,19 @@
   "keywords": [
     "mocha",
     "test",
-    "unit"
+    "unit",
+    "reporter"
   ],
   "author": "Aidan Breen",
-  "license": "ISC"
+  "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/aido179/apb-mocha-reporter"
+  },
+  "bugs": {
+    "url": "https://github.com/aido179/apb-mocha-reporter/issues"
+  },
+  "engines": {
+    "node" : ">=8.11.1"
+  } 
 }
