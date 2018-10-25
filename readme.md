@@ -59,6 +59,15 @@ EG:
 mocha ./**.test.js --reporter apb-mocha-reporter --reporter-options savejson=filename.json"
 ```
 
+### Change output directory
+
+Pass the ```outputdir``` reporter option with a value to change the output directory.
+
+```
+mocha ./**.test.js --reporter apb-mocha-reporter --reporter-options outputdir='customOutputDir'
+
+```
+
 ### Multiple options
 
 To pass multiple options, for example, to be both silent and to save json, reporter-options should be in a comma separated list without spaces.
