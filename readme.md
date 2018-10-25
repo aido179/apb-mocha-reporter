@@ -89,3 +89,5 @@ I didn't want to bloat the package by adding unnecessary templating dependencies
 
 ## Contributing
 PRs welcome.
+
+Have a look at the github issue tracker for suggested updates.
